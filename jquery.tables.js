@@ -28,7 +28,7 @@
         $.each(tableModal.data, function(rowIndex, rowObject) {
             var row = $('<tr/>');
             $.each(rowObject, function(_, text) {
-                row.append($('<t'+(rowIndex == 0 ?  'h' : 'd')+'/>').text(text));
+                row.append($('<t'+(rowIndex == 0 ?  'h' : 'd')+'/>').html(text));
             });
             table.append(row);
         });
@@ -38,6 +38,5 @@
             append(numberOfResults).
             append(table);
     }
-
 
 }( jQuery ));
