@@ -10,9 +10,11 @@
         var settings = $.extend({
             title: 'Default Table Title',
             showNumberOfResults: true,
+            wrapWithDiv: true, // To set row fixed height like so table td div {height:20px;overflow-y:auto;}
         }, options);
 
         tableModal.data = settings.data;
+        tableModal.settings = settings;
 
         if (1 == tableModal.data.length){
             this.empty().append('<h4>No Results</h4>');
@@ -28,6 +30,9 @@
         $.each(tableModal.data, function(rowIndex, rowObject) {
             var row = $('<tr/>');
             $.each(rowObject, function(_, text) {
+                if (tableModal.settings.wrapWithDiv){
+                    text = '<div>'+text+'</div>'
+                }
                 row.append($('<t'+(rowIndex == 0 ?  'h' : 'd')+'/>').html(text));
             });
             table.append(row);
