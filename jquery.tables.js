@@ -24,7 +24,7 @@
         }
 
         var title = $('<h1>'+settings.title+'</h1>'),
-            table = $('<table/>').addClass('table'),
+            table = $('<table/>').addClass('table table-striped'),
             totalLinesHtml = settings.totalLines ? ' (out of '+settings.totalLines+')' : '',
             numberOfResults = settings.showNumberOfResults ?
             '<h4>'+ (tableModal.data.length -1) +' Results '+ totalLinesHtml+' </h4>' : '';
@@ -46,6 +46,19 @@
             });
             table.append(row);
         });
+
+        //fixing. first row is thead
+        var thead = table.find("thead");
+        var thRows =  table.find("tr:has(th)");
+
+        if (thead.length===0){  //if there is no thead element, add one.
+            thead = $("<thead></thead>").appendTo(table);
+        }
+
+        thRows.clone(true).appendTo(thead);
+        thRows.remove();
+
+
         return this.
             empty().
             append(title).
